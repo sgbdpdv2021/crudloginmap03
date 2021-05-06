@@ -1,0 +1,50 @@
+<form (ngSubmit)="onSubmit()">
+  <label for="office"
+    >Office
+    <select
+      type="text"
+      id="office"
+      required
+      [(ngModel)]="select"
+      name="office"
+      (ngModelChange)="onSubmit()"
+      #contam="ngModel"
+    >
+      <option *ngFor="let office of offices" [value]="office"
+        >{{office}}
+      </option>
+    </select>
+  </label>
+</form>
+
+<a (click)="irMapaGrupo()" class="btn btn-secondary btn-sm">
+  <i class="material-icons">mapa</i>
+</a>
+<div class="col-md-8">
+    <table class="table table-striped">
+      <thead>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Office</th>
+        <th>Longitude</th>
+        <th>Latitude</th>
+        <th>Salary</th>
+        <th>Operations</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employeeService.employees">
+          <td>{{ employee.name }}</td>
+          <td>{{ employee.position }}</td>
+          <td>{{ employee.office }}</td>
+          <td>{{ employee.longitude }}</td>
+          <td>{{ employee.latitude }}</td>
+          <td>{{ employee.salary }}</td>
+            <td>
+            <a (click)="irMapa(employee)" class="btn btn-secondary btn-sm">
+              <i class="material-icons">mapa</i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
