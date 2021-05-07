@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from "../../services/employee.service";
-import { NgForm } from "@angular/forms";
 import { Employee } from "../../models/employee";
 import { Router } from '@angular/router';
 
@@ -24,30 +23,22 @@ export class ConsultasComponent implements OnInit {
 
   getEmployees() {
     this.employeeService.getEmployeesFilter(this.select).subscribe((res) => {
-    this.employeeService.employees = res;
-    console.log(this.employeeService.employees)
+          this.employeeService.employees = res;
     });
   }
 
   irMapa(employee: Employee){
-    // Para almacenar un objeto hay que pasarlo a json
-    // En otro caso solo admite string
     localStorage.setItem("employee", JSON.stringify(employee))
     this.router.navigate(['/mapa']);
   }
 
   irMapaGrupo(){
-
-    this.getEmployees()
-    // Para almacenar un objeto hay que pasarlo a json
-    // En otro caso solo admite string
+    // Para almacenar un objeto o array (que es objeto) hay que pasarlo a json
     localStorage.setItem("employeesfilter", JSON.stringify(this.employeeService.employees))
-
     this.router.navigate(['/mapagrupo']);
   }
 
   onSubmit() {
-    console.log("On Submit")
     this.getEmployees();
   }
 
